@@ -7,7 +7,7 @@ def leer_archivos(carpeta):
     
     Args: 
         carpeta (str): ruta a la carpeta que contiene los dataset.
-    Retuns:
+    Returns:
         list: lista de diccionarios con los registros.
     """
     carpeta = Path(carpeta)
@@ -31,7 +31,7 @@ def guardar_dataset(dataset, csv_combinado):
         csv_combinado (str): ruta donde se guardó el archivo.
     """
     
-    with open(csv_combinado, mode ='w', encoding= 'utf-8') as f:
-        writer = csv.DictWriter(f, fieldnames=dataset[0].keys()) #usa las claves del primer registro como encabezado
+    with open(csv_combinado, mode='w', encoding='utf-8', newline='') as f: # NewLine se usa para solventar el salto de linea al guardar el dataset combinado
+        writer = csv.DictWriter(f, fieldnames=dataset[0].keys(), delimiter=';') #usa las claves del primer registro como encabezado
         writer.writeheader()
         writer.writerows(dataset)
