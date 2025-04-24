@@ -25,14 +25,6 @@ dataset = leerCSV(archivo)
 
 header = dataset[0].keys()
 
-# ________________________________________________
-# Enumeracion de columnas para resolver luego enunciados (se puede borrar una vez realizado todo el codigo)
-inp = input('Deseas imprimir listado de columnas? | si - no\n')
-print('')
-if inp == 'si':
-    for i, columna in enumerate(header):
-        print(i, columna)
-# ________________________________________________
 
 #----------------------------------------------------------------------                                                 ----------------------------------------------------------------------------
 #----------------------------------------------------------------------     7. IX_TOT : CANTIDAD DE PERSONAS EN EL HOGAR   ----------------------------------------------------------------------------

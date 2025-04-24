@@ -24,23 +24,18 @@ dataset = leerCSV(archivo)
 
 header = dataset[0].keys()
 
-# ________________________________________________
-# Enumeracion de columnas para resolver luego enunciados (se puede borrar una vez realizado todo el codigo)
-inp = input('Deseas imprimir listado de columnas? | si - no\n')
-print('')
-if inp == 'si':
-    for i, columna in enumerate(header):
-        print(i, columna)
-# ________________________________________________
 
-
-#----------------------------------------------------------------------                                                 ----------------------------------------------------------------------------
-#----------------------------------------------------------------------     3. CH04 : CH04_str                          ----------------------------------------------------------------------------
-#----------------------------------------------------------------------                                                 ----------------------------------------------------------------------------
+#----------------------------------------------------------------------                                          ----------------------------------------------------------------------------
+#----------------------------------------------------------------------         3. CH04 : CH04_str               ----------------------------------------------------------------------------
+#----------------------------------------------------------------------                                          ----------------------------------------------------------------------------
 
 def refactorizacion_datos_CH04(inf):
     """
-
+    Convierte el código numérico del sexo (CH04) a un categoria legible.
+    Args:
+        inf (str): Valor de CH04 (1 para varón, 2 para mujer).
+    Returns:
+        str: 'Varon', 'Mujer' o 'Error' si el valor no es válido.
     """
     if inf == '1':
         return 'Varon'
@@ -51,7 +46,10 @@ def refactorizacion_datos_CH04(inf):
 
 def agregar_columna_refactorizacion_datos_ch4(csv_inicial, csv_final):
     """
-
+    Agrega al CSV una nueva columna 'CH04_str' con el sexo en formato texto.
+    Args:
+        csv_inicial (Path): Ruta del archivo CSV original.
+        csv_final (Path): Ruta del archivo CSV destino (mismo archivo de origen).
     """
     with csv_inicial.open(mode='r', encoding='utf-8') as f_inicial:
         leerDic = csv.DictReader(f_inicial, delimiter = ';')
@@ -79,7 +77,11 @@ def agregar_columna_refactorizacion_datos_ch4(csv_inicial, csv_final):
 
 def refactorizacion_datos_NIVEL_ED(inf):
     """
-
+    Traduce el código de nivel educativo (NIVEL_ED) a su descripción textual.
+    Args:
+        inf (str): Código del nivel educativo.
+    Returns:
+        str: Descripción del nivel o 'ERROR' si el valor no es válido.
     """
     if inf == '1':
         return 'Primario incompleto'
@@ -94,11 +96,14 @@ def refactorizacion_datos_NIVEL_ED(inf):
     elif inf == '7' or inf == '9':
         return 'Sin informacion'
     else:
-        return 'ERROR'
+        return 'Error'
 
 def agregar_columna_refactorizacion_datos_NIVEL_ED(csv_inicial, csv_final):
     """
-
+    Agrega una columna 'NIVEL_ED_str' al CSV con el nivel educativo en texto.
+    Args:
+        csv_inicial (Path): Ruta del archivo CSV original.
+        csv_final (Path): Ruta del archivo CSV destino (mismo archivo de origen).
     """
     with csv_inicial.open(mode='r', encoding='utf-8') as f_inicial:
         leerDic = csv.DictReader(f_inicial, delimiter = ';')
@@ -124,9 +129,14 @@ def agregar_columna_refactorizacion_datos_NIVEL_ED(csv_inicial, csv_final):
 #----------------------------------------------------------------------     5. ESTADO, CAT_OCUP : CONDICION_LABORAL                          ----------------------------------------------------------------------------
 #----------------------------------------------------------------------                                                 ----------------------------------------------------------------------------
 
-def clasificar_condicion_laboral(inf, inf2):
+def clasificar_CONDICION_LABORAL(inf, inf2):
     """
-
+    Clasifica la condición laboral de una persona en función de ESTADO y CAT_OCUP.
+    Args:
+        inf (str): Valor de la variable ESTADO.
+        inf2 (str): Valor de la variable CAT_OCUP.
+    Returns:
+        str: Categoría laboral como texto legible o error en caso de valores inválidos.
     """
     try:
         estado = int(inf)
@@ -156,9 +166,12 @@ def clasificar_condicion_laboral(inf, inf2):
     except:
         return 'Error de conversion'
 
-def agregar_columna_clasificar_condicion_laboral(csv_inicial, csv_final):
+def agregar_columna_clasificar_CONDICION_LABORAL(csv_inicial, csv_final):
     """
-
+    Agrega una columna 'CONDICION_LABORAL' con la clasificación laboral de cada individuo.
+    Args:
+        csv_inicial (Path): Ruta del archivo CSV original.
+        csv_final (Path): Ruta del archivo CSV destino (mismo archivo de origen).
     """
     with csv_inicial.open(mode='r', encoding='utf-8') as f_inicial:
         leerDic = csv.DictReader(f_inicial, delimiter = ';')
@@ -168,7 +181,7 @@ def agregar_columna_clasificar_condicion_laboral(csv_inicial, csv_final):
             estado = fila.get('ESTADO')
             cat_ocup = fila.get('CAT_OCUP')
             
-            fila['CONDICION_LABORAL'] = clasificar_condicion_laboral(estado, cat_ocup) # funcion GET tiene dos parametros, devuelve '(valor x defecto)' si no se encuentra IX_TOT
+            fila['CONDICION_LABORAL'] = clasificar_CONDICION_LABORAL(estado, cat_ocup) # funcion GET tiene dos parametros, devuelve '(valor x defecto)' si no se encuentra IX_TOT
             filas.append(fila)
 
     encabezados = list(filas[0].keys()) # Lista con los encabezados del archivo CSV + nuevo encabezado generado
@@ -180,4 +193,62 @@ def agregar_columna_clasificar_condicion_laboral(csv_inicial, csv_final):
 
     print(f"Archivo guardado con columna 'CONDICION_LABORAL': {csv_final}")
 
-agregar_columna_clasificar_condicion_laboral(archivo, archivo)
+# agregar_columna_clasificar_condicion_laboral(archivo, archivo)
+
+
+#----------------------------------------------------------------------                                                 ----------------------------------------------------------------------------
+#----------------------------------------------------------------------     6. UNIVERSITARIO : CH06, NIVEL_ED_str                          ----------------------------------------------------------------------------
+#----------------------------------------------------------------------                                                 ----------------------------------------------------------------------------
+
+def clasificar_UNIVERSITARIO(inf, inf2):
+    """
+    Determina si una persona mayor de 18 años tiene formación universitaria.
+    Args:
+        inf (str): Edad (CH06).
+        inf2 (str): Nivel educativo como texto (NIVEL_ED_str).
+    Returns:
+        str: 'Si', 'No' o 'No Aplica', según la condición.
+    """
+    try:
+        edad = int(inf)
+        nivel_educativo = inf2
+
+        if edad >= 18 and nivel_educativo == 'Superior o universitario':
+            return 'Si'
+        elif edad >= 18 and nivel_educativo in [
+            'Primario incompleto', 'Primario completo', 'Secundario incompleto', 'Secundario completo'
+            ]:
+            return 'No'
+        else:
+            return 'No Aplica'
+    except:
+        return 'Error de conversion, var: edad'
+
+def agregar_columna_clasificar_UNIVERSITARIO(csv_inicial, csv_final):
+    """
+    Agrega una columna 'UNIVERSITARIO' con la clasificación según edad y educación.
+    Args:
+        csv_inicial (Path): Ruta del archivo CSV original.
+        csv_final (Path): Ruta del archivo CSV destino (mismo archivo de origen).
+    """
+    with csv_inicial.open(mode='r', encoding='utf-8') as f_inicial:
+        leerDic = csv.DictReader(f_inicial, delimiter = ';')
+        filas = []
+        
+        for fila in leerDic:
+            edad = fila.get('CH06')
+            nivel_educativo = fila.get('NIVEL_ED_str')
+            
+            fila['UNIVERSITARIO'] = clasificar_UNIVERSITARIO(edad, nivel_educativo) # funcion GET tiene dos parametros, devuelve '(valor x defecto)' si no se encuentra IX_TOT
+            filas.append(fila)
+
+    encabezados = list(filas[0].keys()) # Lista con los encabezados del archivo CSV + nuevo encabezado generado
+
+    with csv_final.open(mode='w', encoding='utf-8', newline='') as f_final:
+        escritor = csv.DictWriter(f_final, fieldnames=encabezados, delimiter=';')
+        escritor.writeheader()
+        escritor.writerows(filas)
+
+    print(f"Archivo guardado con columna 'UNIVERSITARIO': {csv_final}")
+
+#agregar_columna_clasificar_UNIVERSITARIO(archivo, archivo)
