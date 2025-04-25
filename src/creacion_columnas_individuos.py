@@ -44,7 +44,7 @@ def refactorizacion_datos_CH04(inf):
     else:
         return 'Error'
 
-def agregar_columna_refactorizacion_datos_ch4(csv_inicial, csv_final):
+def agregar_columna_refactorizacion_datos_CH04(csv_inicial, csv_final):
     """
     Agrega al CSV una nueva columna 'CH04_str' con el sexo en formato texto.
     Args:
@@ -68,7 +68,7 @@ def agregar_columna_refactorizacion_datos_ch4(csv_inicial, csv_final):
 
     print(f"Archivo guardado con columna 'CH04_str': {csv_final}")
 
-# agregar_columna_refactorizacion_datos_ch4(archivo, archivo)
+
 
 
 #----------------------------------------------------------------------                                                 ----------------------------------------------------------------------------
@@ -122,7 +122,7 @@ def agregar_columna_refactorizacion_datos_NIVEL_ED(csv_inicial, csv_final):
 
     print(f"Archivo guardado con columna 'NIVEL_ED_str': {csv_final}")
 
-#agregar_columna_refactorizacion_datos_NIVEL_ED(archivo, archivo)
+
 
 
 #----------------------------------------------------------------------                                                 ----------------------------------------------------------------------------
@@ -193,7 +193,7 @@ def agregar_columna_clasificar_CONDICION_LABORAL(csv_inicial, csv_final):
 
     print(f"Archivo guardado con columna 'CONDICION_LABORAL': {csv_final}")
 
-# agregar_columna_clasificar_condicion_laboral(archivo, archivo)
+
 
 
 #----------------------------------------------------------------------                                                 ----------------------------------------------------------------------------
@@ -251,4 +251,19 @@ def agregar_columna_clasificar_UNIVERSITARIO(csv_inicial, csv_final):
 
     print(f"Archivo guardado con columna 'UNIVERSITARIO': {csv_final}")
 
-#agregar_columna_clasificar_UNIVERSITARIO(archivo, archivo)
+
+# 3. 
+print('___________________Punto 3___________________')
+agregar_columna_refactorizacion_datos_CH04(archivo, archivo)
+
+# 4. 
+print('___________________Punto 4___________________')
+agregar_columna_refactorizacion_datos_NIVEL_ED(archivo, archivo)
+
+# 5.
+print('___________________Punto 5___________________')
+agregar_columna_clasificar_CONDICION_LABORAL(archivo, archivo)
+
+# 6.
+print('___________________Punto 6___________________')
+agregar_columna_clasificar_UNIVERSITARIO(archivo, archivo)

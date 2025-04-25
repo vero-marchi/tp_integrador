@@ -76,7 +76,6 @@ def agregar_columna_tipo_hogar(csv_inicial, csv_final):
 
     print(f"Archivo guardado con columna 'TIPO_HOGAR': {csv_final}")
 
-# agregar_columna_tipo_hogar(archivo, archivo) → invocar en hogares.ipynb
 
 #----------------------------------------------------------------------                                           ----------------------------------------------------------------------------
 #----------------------------------------------------------------------         8. V4 : MATERIAL_TECHUMBRE           ----------------------------------------------------------------------------
@@ -128,7 +127,6 @@ def agregar_columna_material_techumbre(csv_inicial, csv_final):
         
     print(f"Archivo guardado con columna 'MATERIAL_TECHUMBRE': {csv_final}")
 
-# agregar_columna_material_techumbre(archivo, archivo) → invocar en hogares.ipynb
 
 #----------------------------------------------------------------------                                           ----------------------------------------------------------------------------
 #----------------------------------------------------------------------        9. IX_TOT, II2 : DENSIDAD_HOGAR      ----------------------------------------------------------------------------
@@ -196,7 +194,6 @@ def agregar_columna_densidad_hogar(csv_inicial, csv_final):
 
     print(f"Archivo guardado con columna 'DENSIDAD_HOGAR': {csv_final}")
 
-# agregar_columna_densidad_hogar(archivo, archivo) → invocar en hogares.ipynb
 
 
 #----------------------------------------------------------------------                                               ----------------------------------------------------------------------------
@@ -295,4 +292,19 @@ def agregar_columna_clasificar_habitabilidad(csv_inicial, csv_final):
 
     print(f"Archivo guardado con columna 'CONDICION_DE_HABITABILIDAD': {csv_final}")
 
-# agregar_columna_clasificar_habitabilidad(archivo, archivo) → invocar en hogares.ipynb
+
+# 7. 
+print('___________________Punto 7___________________')
+agregar_columna_tipo_hogar(archivo, archivo)
+
+# 8. 
+print('___________________Punto 8___________________')
+agregar_columna_material_techumbre(archivo, archivo)
+
+# 9.
+print('___________________Punto 9___________________')
+agregar_columna_densidad_hogar(archivo, archivo)
+
+# 10.
+print('___________________Punto 10___________________')
+agregar_columna_clasificar_habitabilidad(archivo, archivo)
